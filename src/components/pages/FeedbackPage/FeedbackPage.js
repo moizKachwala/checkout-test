@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function FeedbackPage(props) {
-    return(
+    return (
         <h1>Moiz</h1>
-    )
+    );
 }
