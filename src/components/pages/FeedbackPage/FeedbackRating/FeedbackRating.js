@@ -4,8 +4,8 @@ import {
     CardContent,
 } from '@material-ui/core';
 
-import { getRatingChartData } from '../../../util/format';
-import BarChart from '../../../common/widgets/ratingWidget/BarChart';
+import { getRatingChartData } from '../../../../util/format';
+import BarChart from '../../../../common/widgets/ratingWidget/BarChart';
 
 export default function RatingGraph({ feedbacks = [] }) {
 

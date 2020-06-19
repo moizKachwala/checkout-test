@@ -10,8 +10,8 @@ import {
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 
-import FeedbackList from './FeedbackList';
-import FeedbackRating from './FeedbackRating';
+import { FeedbackList } from './FeedbackList';
+import { FeedbackRating } from './FeedbackRating';
 
 export default function FeedbackPage(props) {
 
