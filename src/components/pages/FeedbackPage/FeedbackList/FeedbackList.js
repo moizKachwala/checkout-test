@@ -35,7 +35,7 @@ export default function FeedbackList({ feedbacks = [] }) {
                         </Typography>
                     </CardContent>
                 </Card>
-            ))}
+            )).reverse()}
         </Paper>
     )
 }
