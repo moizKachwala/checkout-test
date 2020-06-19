@@ -46,6 +46,12 @@ const useStyles = makeStyles(theme => ({
 export default function FeedbackPage(props) {
     const classes = useStyles();
     const [feedbacks, setFeedbacks] = useState([]);
+    const initalValues = {
+        name: '',
+        email: '',
+        rating: 0,
+        comment: ''
+    };
 
     const handleSumit = (feedback) => {
         setFeedbacks(prevState => {
@@ -72,13 +78,8 @@ export default function FeedbackPage(props) {
                 <Grid item xs={12} sm={12} md={8}>
                     <Grid>
                         <Formik
-                            initialValues={
-                                {
-                                    name: '',
-                                    email: '',
-                                    rating: 0,
-                                    comment: ''
-                                }}
+                            enableReinitialize={true}
+                            initialValues={initalValues}
                             validate={values => {
                                 const errors = {};
 
@@ -96,8 +97,10 @@ export default function FeedbackPage(props) {
 
                                 return errors;
                             }}
-                            onSubmit={(values, actions) => {
+                            onSubmit={(values, { setStatus, resetForm }) => {
                                 handleSumit(values);
+                                resetForm(initalValues);
+                                setStatus({ success: true });
                             }}
                         >
                             {({
