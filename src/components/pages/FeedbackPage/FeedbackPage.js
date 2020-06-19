@@ -16,6 +16,7 @@ import { Rating } from '@material-ui/lab';
 
 import { FeedbackList } from './FeedbackList';
 import { FeedbackRating } from './FeedbackRating';
+import { validate } from './FeedbackValidation/validation';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -23,11 +24,12 @@ const useStyles = makeStyles(theme => ({
     },
     rating: {
         marginLeft: theme.spacing(0.5),
-        marginBottom: theme.spacing(1),
+        marginBottom: theme.spacing(0.5),
     },
     ratingLabel: {
         marginTop: theme.spacing(1),
         marginLeft: theme.spacing(0.5),
+        marginBottom: theme.spacing(0.5),
     },
     textField: {
         margin: theme.spacing(1),
@@ -80,23 +82,7 @@ export default function FeedbackPage(props) {
                         <Formik
                             enableReinitialize={true}
                             initialValues={initalValues}
-                            validate={values => {
-                                const errors = {};
-
-                                if (!values.name) {
-                                    errors.name = "Name is required"
-                                }
-
-                                if (!values.email) {
-                                    errors.email = "Email is required"
-                                }
-
-                                if (!values.rating) {
-                                    errors.rating = "Rating is required"
-                                }
-
-                                return errors;
-                            }}
+                            validate={validate}
                             onSubmit={(values, { setStatus, resetForm }) => {
                                 handleSumit(values);
                                 resetForm(initalValues);
@@ -149,7 +135,11 @@ export default function FeedbackPage(props) {
                                                     />
                                                 </div>
                                                 <div className="form-group">
-                                                    <Typography className={classes.ratingLabel} component="legend">Select Rating</Typography>
+                                                    <Typography 
+                                                        className={classes.ratingLabel}
+                                                        component="legend"
+                                                        color={Boolean(touched.rating && errors.rating) ? 'error' : ''}
+                                                    >Select Rating</Typography>
                                                     <Rating
                                                         className={classes.rating}
                                                         name="rating"

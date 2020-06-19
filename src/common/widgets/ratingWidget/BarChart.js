@@ -15,7 +15,8 @@ export default function BarChart({ title, desc, data }) {
                             drawOnChartArea: false,
                         },
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            stepSize: 1
                         }
                     }],
                     yAxes: [{
