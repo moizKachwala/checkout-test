@@ -1,17 +1,20 @@
 import React from 'react';
-import { Card, CardContent, Typography, CardHeader, makeStyles } from '@material-ui/core';
+import { Card, CardContent, Typography, CardHeader, makeStyles, Paper } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => ({
     root: {
-      marginTop: theme.spacing(0.5),
+        marginTop: theme.spacing(0.5),
     },
 }));
 
 export default function FeedbackList({ feedbacks = [] }) {
     const classes = useStyles();
     return (
-        <div className="feedback-list">
+        <Paper>
+            <Typography align="center" gutterBottom>
+                {feedbacks.length > 0 ? "All Feedbacks" : "No feedbacks added yet!"}
+            </Typography>
             {feedbacks.map(({ name, email, rating, comment }, index) => (
                 <Card className={classes.root} key={index} variant="outlined" square>
                     <CardHeader
@@ -28,6 +31,6 @@ export default function FeedbackList({ feedbacks = [] }) {
                     </CardContent>
                 </Card>
             ))}
-        </div>
+        </Paper>
     )
 }

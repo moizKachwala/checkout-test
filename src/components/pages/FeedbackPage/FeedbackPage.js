@@ -37,6 +37,10 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         width: '90%',
     },
+    ratingError: {
+        marginLeft: theme.spacing(1),
+        fontSize: '0.75rem',
+    }
 }));
 
 export default function FeedbackPage(props) {
@@ -55,7 +59,7 @@ export default function FeedbackPage(props) {
     return (
         <div className="feedback-page">
             <Grid container spacing={1}>
-                <Grid xs={12}>
+                <Grid item xs={12}>
                     <CssBaseline />
                     <Typography variant="h4" align="center" component="h1" gutterBottom>
                         Feedback Form
@@ -70,11 +74,28 @@ export default function FeedbackPage(props) {
                         <Formik
                             initialValues={
                                 {
-                                    name: 'Moiz Kachwala',
-                                    email: 'moizk@hotmail.com',
-                                    rating: 4,
-                                    comment: 'This is a test comment for you to go through ti and the product is very good and useful'
+                                    name: '',
+                                    email: '',
+                                    rating: 0,
+                                    comment: ''
                                 }}
+                            validate={values => {
+                                const errors = {};
+
+                                if (!values.name) {
+                                    errors.name = "Name is required"
+                                }
+
+                                if (!values.email) {
+                                    errors.email = "Email is required"
+                                }
+
+                                if (!values.rating) {
+                                    errors.rating = "Rating is required"
+                                }
+
+                                return errors;
+                            }}
                             onSubmit={(values, actions) => {
                                 handleSumit(values);
                             }}
@@ -104,7 +125,7 @@ export default function FeedbackPage(props) {
                                                         label="Name"
                                                         name="name"
                                                         className={classes.textField}
-                                                        margin="normal"
+                                                        required
                                                         onBlur={handleBlur}
                                                         onChange={handleChange}
                                                         value={values.name}
@@ -115,7 +136,7 @@ export default function FeedbackPage(props) {
                                                         type="email"
                                                         label="Email"
                                                         name="email"
-                                                        margin="normal"
+                                                        required
                                                         className={classes.textField}
                                                         onBlur={handleBlur}
                                                         onChange={handleChange}
@@ -132,6 +153,7 @@ export default function FeedbackPage(props) {
                                                         value={values.rating}
                                                         onChange={handleChange}
                                                         size="large" />
+                                                    <Typography className={classes.ratingError} color="error">{touched.rating && errors.rating}</Typography>
                                                 </div>
                                                 <div className="form-group">
                                                     <TextField
@@ -167,7 +189,7 @@ export default function FeedbackPage(props) {
                                 )}
                         </Formik>
                     </Grid>
-                    <Grid direction="row">
+                    <Grid>
                         <FeedbackList feedbacks={feedbacks} />
                     </Grid>
                 </Grid>
