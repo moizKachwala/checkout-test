@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Card,
     CardContent,
+    CardHeader,
 } from '@material-ui/core';
 
 import { getRatingChartData } from '../../../../util/format';
@@ -24,8 +25,14 @@ export default function RatingGraph({ feedbacks = [] }) {
 
     return (
         <Card>
+            <CardHeader 
+                title="Feedbacks"
+                subheader={`${feedbacks.length} total ratings`}
+            />
             <CardContent>
-                <BarChart data={chartData} />
+                <BarChart
+                    data={chartData}
+                />
             </CardContent>
         </Card>
     );
