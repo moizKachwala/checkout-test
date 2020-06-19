@@ -4,15 +4,21 @@ import {
     Button,
     TextField,
 } from '@material-ui/core';
-import {Rating} from '@material-ui/lab';
+import { Rating } from '@material-ui/lab';
+
+import FeedbackList from './FeedbackList';
 
 export default function FeedbackPage(props) {
 
     const [feedbacks, setFeedbacks] = useState([]);
 
     const handleSumit = (feedback) => {
-        console.log(feedback);
-        setFeedbacks([feedback]);
+        setFeedbacks(prevState => {
+            return [
+                ...prevState,
+                feedback,
+            ];
+        });
     }
 
     return (
@@ -25,7 +31,7 @@ export default function FeedbackPage(props) {
                         rating: 0,
                     }}
                 onSubmit={(values, actions) => {
-                    console.log(values);
+                    handleSumit(values);
                 }}
             >
                 {({
@@ -36,16 +42,15 @@ export default function FeedbackPage(props) {
                     handleBlur,
                     handleSubmit,
                 }) => (
-                        <form 
+                        <form
                             noValidate={true}
                             autoComplete="off"
                             onSubmit={handleSubmit}
-                            >
+                        >
                             <div className="input-group">
                                 <TextField
                                     type="name"
                                     label="Name"
-                                    margin="normal"
                                     name="name"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
@@ -58,7 +63,6 @@ export default function FeedbackPage(props) {
                                 <TextField
                                     type="email"
                                     label="Email"
-                                    margin="normal"
                                     name="email"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
@@ -74,6 +78,20 @@ export default function FeedbackPage(props) {
                                     onChange={handleChange}
                                     size="large" />
                             </div>
+                            <div className="input-group">
+                                <TextField
+                                    type="comment"
+                                    label="Comment"
+                                    multiline
+                                    rows="4"
+                                    name="comment"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.comment}
+                                    helperText={touched.comment && errors.comment}
+                                    error={Boolean(touched.comment && errors.comment)}
+                                />
+                            </div>
                             <div className="">
                                 <Button
                                     variant="contained"
@@ -87,6 +105,8 @@ export default function FeedbackPage(props) {
                         </form>
                     )}
             </Formik>
+
+            <FeedbackList feedbacks={feedbacks} />
         </>
     );
 }
