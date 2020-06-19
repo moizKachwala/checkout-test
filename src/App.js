@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container } from '@material-ui/core';
 import { FeedbackPage } from './components/pages/FeedbackPage';
 
 function App() {

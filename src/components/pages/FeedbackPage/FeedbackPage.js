@@ -22,17 +22,19 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(2),
     },
     rating: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+        marginLeft: theme.spacing(0.5),
+        marginBottom: theme.spacing(1),
+    },
+    ratingLabel: {
+        marginTop: theme.spacing(1),
+        marginLeft: theme.spacing(0.5),
     },
     textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+        margin: theme.spacing(1),
         width: '40%',
     },
     textArea: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+        margin: theme.spacing(1),
         width: '90%',
     },
 }));
@@ -123,7 +125,7 @@ export default function FeedbackPage(props) {
                                                     />
                                                 </div>
                                                 <div className="form-group">
-                                                    <Typography className={classes.rating} component="legend">Select Rating</Typography>
+                                                    <Typography className={classes.ratingLabel} component="legend">Select Rating</Typography>
                                                     <Rating
                                                         className={classes.rating}
                                                         name="rating"
@@ -165,11 +167,9 @@ export default function FeedbackPage(props) {
                                 )}
                         </Formik>
                     </Grid>
-
-                    <Grid>
+                    <Grid direction="row">
                         <FeedbackList feedbacks={feedbacks} />
                     </Grid>
-
                 </Grid>
             </Grid>
         </div>
