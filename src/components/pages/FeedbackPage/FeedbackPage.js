@@ -11,6 +11,7 @@ import {
 import { Rating } from '@material-ui/lab';
 
 import FeedbackList from './FeedbackList';
+import RatingWidget from '../../../common/widgets/ratingWidget/RatingWidget';
 
 export default function FeedbackPage(props) {
 
@@ -23,6 +24,17 @@ export default function FeedbackPage(props) {
                 feedback,
             ];
         });
+    }
+
+    const chartData = {
+        labels: ['1 Star', '2 Star', '3 Star', '4 Star', '5 Star'],
+        datasets: [{
+            label: "Customer Ratings",
+            data: [10, 20, 30, 40, 50],
+            backgroundColor: "#ffb400",
+            strokeColor: "brown",
+            borderWidth: 1
+        }],
     }
 
     return (
@@ -119,7 +131,7 @@ export default function FeedbackPage(props) {
                     </Formik>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6}>
-                    Graph
+                    <RatingWidget title="Customer Ratings" data={chartData} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                     <FeedbackList feedbacks={feedbacks} />
