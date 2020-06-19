@@ -138,8 +138,7 @@ export default function FeedbackPage(props) {
                                                     <Typography
                                                         className={classes.ratingLabel}
                                                         component="legend"
-                                                        color={Boolean(touched.rating && errors.rating) ? 'error' : 'inherit'}
-                                                    >Select Rating</Typography>
+                                                        color={Boolean(touched.rating && errors.rating) ? 'error' : 'inherit'} >Select Rating</Typography>
                                                     <Rating
                                                         className={classes.rating}
                                                         name="rating"
