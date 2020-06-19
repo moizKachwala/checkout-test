@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardContent, Typography, CardHeader, makeStyles, Paper } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 
@@ -37,4 +38,8 @@ export default function FeedbackList({ feedbacks = [] }) {
             ))}
         </Paper>
     )
+}
+
+FeedbackList.propTypes = {
+    feedbacks: PropTypes.array.isRequired
 }

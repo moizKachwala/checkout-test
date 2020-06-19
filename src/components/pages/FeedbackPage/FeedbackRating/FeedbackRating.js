@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     Card,
     CardContent,
@@ -6,7 +7,7 @@ import {
 } from '@material-ui/core';
 
 import { getRatingChartData } from '../../../../util/format';
-import BarChart from '../../../../common/widgets/ratingWidget/BarChart';
+import BarChart from '../../../../common/widgets/BarChart/BarChart';
 
 export default function RatingGraph({ feedbacks = [] }) {
 
@@ -36,4 +37,8 @@ export default function RatingGraph({ feedbacks = [] }) {
             </CardContent>
         </Card>
     );
+}
+
+RatingGraph.propTypes = {
+    feedbacks: PropTypes.array.isRequired
 }

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
+import PropTypes from 'prop-types';
 import { Chart } from "chart.js";
 
-export default function BarChart({ title, desc, data }) {
+export default function BarChart({ data }) {
     const ref = useRef();
     useEffect(() => {
         const chart = new Chart(ref.current, {
@@ -35,8 +36,10 @@ export default function BarChart({ title, desc, data }) {
     }, [data]);
 
     return (
-        <>
-            <canvas ref={ref} />
-        </>
+        <canvas ref={ref} />
     );
+}
+
+BarChart.propTypes = {
+    data: PropTypes.object.isRequired
 }

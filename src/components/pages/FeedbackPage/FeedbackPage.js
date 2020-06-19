@@ -105,7 +105,7 @@ export default function FeedbackPage(props) {
                                     >
                                         <Card>
                                             <CardHeader
-                                                title="Submit Feedback"
+                                                title="Add Feedback"
                                             />
                                             <CardContent>
                                                 <div className="form-group">
@@ -135,10 +135,10 @@ export default function FeedbackPage(props) {
                                                     />
                                                 </div>
                                                 <div className="form-group">
-                                                    <Typography 
+                                                    <Typography
                                                         className={classes.ratingLabel}
                                                         component="legend"
-                                                        color={Boolean(touched.rating && errors.rating) ? 'error' : ''}
+                                                        color={Boolean(touched.rating && errors.rating) ? 'error' : 'inherit'}
                                                     >Select Rating</Typography>
                                                     <Rating
                                                         className={classes.rating}
