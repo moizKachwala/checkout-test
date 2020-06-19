@@ -16,7 +16,7 @@ export default function RatingGraph({ feedbacks = [] }) {
     const chartData = {
         labels: ['1 Star', '2 Star', '3 Star', '4 Star', '5 Star'],
         datasets: [{
-            label: "Customer Ratings",
+            label: "Total ratings",
             data: data,
             backgroundColor: "#ffb400",
             strokeColor: "brown",

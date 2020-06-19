@@ -26,7 +26,7 @@ export default function BarChart({ data }) {
                         },
                         stacked: true
                     }]
-                }
+                },
             },
         });
 
