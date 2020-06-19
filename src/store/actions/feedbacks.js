@@ -1,0 +1,18 @@
+export const FEEDBACKS_LIST = 'FEEDBACKS_LIST';
+export const FEEDBACKS_LIST_PENDING = 'FEEDBACKS_LIST_PENDING';
+export const FEEDBACKS_LIST_FULFILLED = 'FEEDBACKS_LIST_FULFILLED';
+export const FEEDBACKS_LIST_REJECTED = 'FEEDBACKS_LIST_REJECTED';
+
+export const FEEDBACKS_CREATE = 'FEEDBACKS_CREATE';
+export const FEEDBACKS_CREATE_PENDING = 'FEEDBACKS_CREATE_PENDING';
+export const FEEDBACKS_CREATE_FULFILLED = 'FEEDBACKS_CREATE_FULFILLED';
+export const FEEDBACKS_CREATE_REJECTED = 'FEEDBACKS_CREATE_REJECTED';
+
+export const list = () => ({
+    type: FEEDBACKS_LIST,
+});
+
+export const create = (feedback, callback) => ({
+    type: FEEDBACKS_CREATE,
+    payload: {feedback, callback},
+});
