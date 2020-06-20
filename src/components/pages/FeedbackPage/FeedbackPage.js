@@ -7,19 +7,12 @@ import {
 
 import { FeedbackList } from './FeedbackList';
 import { FeedbackRating } from './FeedbackRating';
-import { validate } from './FeedbackValidation/validation';
 import {FeedbackForm} from './FeedbackForm';
 
 export default function FeedbackPage(props) {
     const [feedbacks, setFeedbacks] = useState([]);
-    const initialValues = {
-        name: '',
-        email: '',
-        rating: 0,
-        comment: ''
-    };
 
-    const handleSubmit = (feedback) => {
+    const handleFormSubmit = (feedback) => {
         setFeedbacks(prevState => {
             return [
                 ...prevState,
@@ -44,9 +37,7 @@ export default function FeedbackPage(props) {
                 <Grid item xs={12} sm={12} md={8}>
                     <Grid>
                         <FeedbackForm
-                            handleSubmit={handleSubmit}
-                            initialValues={initialValues}
-                            validate={validate}
+                            handleFormSubmit={handleFormSubmit}
                         />
                     </Grid>
                     <Grid>

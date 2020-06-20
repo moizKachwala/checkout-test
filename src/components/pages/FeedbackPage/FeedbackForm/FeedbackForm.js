@@ -1,16 +1,19 @@
 import React from 'react';
 import { Formik } from 'formik';
+import PropTypes from 'prop-types';
+
 import {
     Button,
     TextField,
     Card,
     CardContent,
     CardActions,
-    Typography,
     CardHeader,
     makeStyles,
+    Typography,
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
+import { validate } from '../FeedbackValidation/validation';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -39,16 +42,21 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function FeedbackForm(props) {
+export default function FeedbackForm({ handleFormSubmit }) {
     const classes = useStyles();
-    const {handleSubmit, initialValues, validate} = props;
+    const initialValues = {
+        name: '',
+        email: '',
+        rating: 0,
+        comment: ''
+    };
     return (
         <Formik
             enableReinitialize={true}
             initialValues={initialValues}
             validate={validate}
             onSubmit={(values, { setStatus, resetForm }) => {
-                handleSubmit(values);
+                handleFormSubmit(values);
                 resetForm(initialValues);
                 setStatus({ success: true });
             }}
@@ -66,6 +74,7 @@ export default function FeedbackForm(props) {
                         noValidate={true}
                         autoComplete="off"
                         onSubmit={handleSubmit}
+                        name="feedback-form"
                     >
                         <Card>
                             <CardHeader
@@ -75,6 +84,7 @@ export default function FeedbackForm(props) {
                                 <div className="form-group">
                                     <TextField
                                         type="name"
+                                        id="name"
                                         label="Name"
                                         name="name"
                                         className={classes.textField}
@@ -87,6 +97,7 @@ export default function FeedbackForm(props) {
                                     />
                                     <TextField
                                         type="email"
+                                        id="email"
                                         label="Email"
                                         name="email"
                                         required
@@ -134,6 +145,7 @@ export default function FeedbackForm(props) {
                                         color="secondary"
                                         type="submit"
                                         size="medium"
+                                        data-testid="submitButton"
                                         className={classes.button}
                                     >
                                         Submit Feedback
@@ -145,4 +157,8 @@ export default function FeedbackForm(props) {
                 )}
         </Formik>
     );
+}
+
+FeedbackForm.propTypes = {
+    handleFormSubmit: PropTypes.func.isRequired,
 }

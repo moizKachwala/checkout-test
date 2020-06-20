@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { act } from "react-dom/test-utils";
 import { render, fireEvent, wait, waitForElement } from '@testing-library/react'
 
-import FeedbackPage from "./FeedbackPage";
+import FeedbackForm from "./FeedbackForm";
+import { validate } from './../FeedbackValidation/validation';
 
 const fakeFeedback = {
     name: 'John Smith',
@@ -37,24 +37,33 @@ const fakeFeedback = {
 //     expect(getByTestId("page-title")).toHaveTextContent("Feedback Form");
 // });
 
-it('should have no feedback in initial load', async () => {
-    
-    const mock = jest.fn();
-    const { container, getByLabelText, getByTestId } = render(<FeedbackPage/>);
+const handleSubmit = jest.fn();
 
-    const name = await waitForElement(() => getByLabelText("name", { exact: false, selector: "input" }));
-    const email = await waitForElement(() => getByLabelText("email", { exact: false, selector: "input" }));
+it('should have no feedback in initial load', async () => {
+    const initialValues = {
+        name: '',
+        email: '',
+        rating: 0,
+        comment: '',
+    };
+    const { container, getByTestId } = render(<FeedbackForm handleFormSubmit={handleSubmit} initialValues={initialValues} validate={validate} />);
+    const form = container.querySelector('form[name="feedback-form"]');
+
+    const name = container.querySelector('[name="name"]');
+    const email = container.querySelector('[name="email"]');
     const button = await waitForElement(() => getByTestId("submitButton"));
 
-    fireEvent.change(name, {target: {value: fakeFeedback.name}});
-    fireEvent.change(email, {target: {value: fakeFeedback.email}});
 
+    // fireEvent.change(name, {target: {value: fakeFeedback.name}});
+    // fireEvent.change(email, {target: {value: fakeFeedback.email}});
+
+    fireEvent.change(name, { target: { value: "mail@email.com" } });
+    fireEvent.change(email, { target: { value: "mail@email.com" } });
     fireEvent.click(button);
+    
 
-    wait(() => {
-        expect(mock).toBeCalled();
+    // fireEvent.submit(form);
+    await wait(() => {
+        expect(handleSubmit).toHaveBeenCalledTimes(1);
     });
 });
-
-
-
