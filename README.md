@@ -1,28 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Demo - https://checkout-react.herokuapp.com/
+
+## About the project
+The project demonstrates some of the core features of React and hooks. The UI is built to accept the feedback from the customer. The customer can also give the ratings and based on the ratings, it will display the graph. It will also show all the latest feedbacks in the bottom.
 
 ## Available Scripts
 
-In the project directory, you can run:
+1. `npm start`
+2. `npm test`
+3. `npm run build`
 
-### `npm start`
+## Technology Used
+The project was initalized via Create-React-App which is a boostraping mechanism for React. it uses React and some of the latest features like React hooks. It also uses Jest and React Testing library for unit testing. Material UI components were used to design and build the layout.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Scope and improvements.
+The project was built only using react and no redux was added to keep it simple.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Some of the improvements can be added:
+1. using redux for sending feedbacks to server
+2. Use of redux-sagas to handle the asynchronous behavior
+3. Use of selectors.
+4. Using Sass for better formatting.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Deployment
+The project was deployed on heroku and can be accessed on https://checkout-react.herokuapp.com
