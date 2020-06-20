@@ -69,7 +69,7 @@ export default function FeedbackPage(props) {
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <CssBaseline />
-                    <Typography variant="h4" align="center" component="h1" gutterBottom>
+                    <Typography variant="h4" data-testid="page-title" align="center" component="h1" gutterBottom>
                         Feedback Form
                         </Typography>
                 </Grid>

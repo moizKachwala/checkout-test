@@ -17,11 +17,11 @@ export default function FeedbackList({ feedbacks = [] }) {
     const classes = useStyles();
     return (
         <Paper className={classes.root}>
-            <Typography gutterBottom>
+            <Typography gutterBottom data-testid="title">
                 {feedbacks.length > 0 ? "All Feedbacks" : "No feedback added yet!"}
             </Typography>
             {feedbacks.map(({ name, email, rating, comment }, index) => (
-                <Card className={classes.card} key={index} variant="outlined" square>
+                <Card data-testid={`row-${index}`} className={classes.card} key={index} variant="outlined" square>
                     <CardHeader
                         title={name}
                         subheader={email}

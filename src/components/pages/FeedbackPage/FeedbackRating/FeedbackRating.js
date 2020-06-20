@@ -10,7 +10,6 @@ import { getRatingChartData } from '../../../../util/format';
 import BarChart from '../../../../common/widgets/BarChart/BarChart';
 
 export default function RatingGraph({ feedbacks = [] }) {
-
     const data = getRatingChartData(feedbacks);
 
     const chartData = {
@@ -26,7 +25,7 @@ export default function RatingGraph({ feedbacks = [] }) {
 
     return (
         <Card>
-            <CardHeader 
+            <CardHeader
                 title="Feedbacks"
                 subheader={`${feedbacks.length} total ratings`}
             />
