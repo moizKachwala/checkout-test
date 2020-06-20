@@ -83,10 +83,9 @@ export default function FeedbackForm({ handleFormSubmit }) {
                             <CardContent>
                                 <div className="form-group">
                                     <TextField
-                                        type="name"
-                                        id="name"
                                         label="Name"
                                         name="name"
+                                        inputProps={{ "data-testid": "name-input" }}
                                         className={classes.textField}
                                         required
                                         onBlur={handleBlur}
@@ -100,6 +99,7 @@ export default function FeedbackForm({ handleFormSubmit }) {
                                         id="email"
                                         label="Email"
                                         name="email"
+                                        inputProps={{ "data-testid": "email-input" }}
                                         required
                                         className={classes.textField}
                                         onBlur={handleBlur}

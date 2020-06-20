@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { act } from "react-dom/test-utils";
 import { render, fireEvent, wait, waitForElement } from '@testing-library/react'
 
 import FeedbackForm from "./FeedbackForm";
-import { validate } from './../FeedbackValidation/validation';
 
 const fakeFeedback = {
     name: 'John Smith',
@@ -12,57 +12,55 @@ const fakeFeedback = {
     comment: '',
 };
 
-// let container = null;
-
-// beforeEach(() => {
-//     container = document.createElement("div");
-//     document.body.appendChild(container);
-// });
-
-// afterEach(() => {
-//     // cleanup on exiting
-//     ReactDOM.unmountComponentAtNode(container);
-//     container.remove();
-//     container = null;
-// });
-
-// it("renders without any error", () => {
-//     act(() => {
-//         ReactDOM.render(<FeedbackPage />, container);
-//     });
-// });
-
-// it('should render title', () => {
-//     const { getByTestId } = render(<FeedbackPage feedbacks={[]} />, container);
-//     expect(getByTestId("page-title")).toHaveTextContent("Feedback Form");
-// });
-
+let container = null;
 const handleSubmit = jest.fn();
 
-it('should have no feedback in initial load', async () => {
-    const initialValues = {
-        name: '',
-        email: '',
-        rating: 0,
-        comment: '',
-    };
-    const { container, getByTestId } = render(<FeedbackForm handleFormSubmit={handleSubmit} initialValues={initialValues} validate={validate} />);
-    const form = container.querySelector('form[name="feedback-form"]');
+beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+});
 
-    const name = container.querySelector('[name="name"]');
-    const email = container.querySelector('[name="email"]');
+afterEach(() => {
+    // cleanup on exiting
+    ReactDOM.unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+});
+
+it("renders without any error", () => {
+    act(() => {
+        ReactDOM.render(<FeedbackForm handleFormSubmit={handleSubmit} />, container);
+    });
+});
+
+it('should not submit the form if the form is invalid', async () => {
+    const { getByTestId } = render(<FeedbackForm handleFormSubmit={handleSubmit} />, container);
+
+    // get the button
     const button = await waitForElement(() => getByTestId("submitButton"));
 
-
-    // fireEvent.change(name, {target: {value: fakeFeedback.name}});
-    // fireEvent.change(email, {target: {value: fakeFeedback.email}});
-
-    fireEvent.change(name, { target: { value: "mail@email.com" } });
-    fireEvent.change(email, { target: { value: "mail@email.com" } });
+    // simulate click
     fireEvent.click(button);
-    
 
-    // fireEvent.submit(form);
+    await wait(() => {
+        expect(handleSubmit).toHaveBeenCalledTimes(0);
+    });
+});
+
+it('should submit the form if valid', async () => {
+    const { getByTestId, getByRole } = render(<FeedbackForm handleFormSubmit={handleSubmit} />, container);
+
+    const name = await waitForElement(() => getByTestId("name-input"));
+    const email = await waitForElement(() => getByTestId("email-input"));
+    const rating = await waitForElement(() => getByRole('radio', {name: /5 stars/i }));
+    const button = await waitForElement(() => getByTestId("submitButton"));
+
+    // change event
+    fireEvent.change(name, { target: { value: fakeFeedback.name }});
+    fireEvent.change(email, {target: {value: fakeFeedback.email}});
+    fireEvent.click(rating);
+    fireEvent.click(button);
+
     await wait(() => {
         expect(handleSubmit).toHaveBeenCalledTimes(1);
     });
