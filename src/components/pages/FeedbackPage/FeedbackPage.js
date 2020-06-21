@@ -12,6 +12,7 @@ import {FeedbackForm} from './FeedbackForm';
 export default function FeedbackPage(props) {
     const [feedbacks, setFeedbacks] = useState([]);
 
+    // A function to add the feedbacks to state.
     const handleFormSubmit = (feedback) => {
         setFeedbacks(prevState => {
             return [

@@ -1,3 +1,10 @@
+/**
+ * A method to generate the data for the chart
+ * 
+ * @param {*} [feedbacks=[]] - Accepts the feedbacks and generate a series of data for chart
+ * @returns series of data for chart.
+ */
+
 export const getRatingChartData = (feedbacks = []) => {
     // initial ratings.
     let ratings = {

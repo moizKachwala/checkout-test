@@ -4,6 +4,8 @@ import { Chart } from "chart.js";
 
 export default function BarChart({ data }) {
     const ref = useRef();
+
+    // creating the chart data
     useEffect(() => {
         const chart = new Chart(ref.current, {
             data,
@@ -30,6 +32,7 @@ export default function BarChart({ data }) {
             },
         });
 
+        // clearing up on unmount
         return () => {
             chart.destroy();
         };
